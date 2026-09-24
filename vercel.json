@@ -1,0 +1,10 @@
+{
+  "headers": [
+    {
+      "source": "/resume.pdf",
+      "headers": [
+        { "key": "Content-Disposition", "value": "attachment; filename=\"Fizal_UX-UI_Resume.pdf\"" }
+      ]
+    }
+  ]
+}

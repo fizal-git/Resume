@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>document.documentElement.classList.add('js-anim');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohammed Fizal — Senior UX/UI Designer</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%20width%3D%2232%22%20height%3D%2232%22%3E%0A%20%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%23FFD700%22%20/%3E%0A%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2254%25%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-size%3D%2220%22%20font-weight%3D%22300%22%20fill%3D%22%23111111%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EF%3C/text%3E%0A%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%20width%3D%2232%22%20height%3D%2232%22%3E%0A%20%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%23FFD700%22%20/%3E%0A%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2254%25%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-size%3D%2220%22%20font-weight%3D%22300%22%20fill%3D%22%23111111%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EF%3C/text%3E%0A%3C/svg%3E" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%20width%3D%2232%22%20height%3D%2232%22%3E%0A%20%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%23111111%22%20/%3E%0A%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2254%25%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-size%3D%2220%22%20font-weight%3D%22300%22%20fill%3D%22%23FFD700%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EF%3C/text%3E%0A%3C/svg%3E" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F7F4;
+    --paper-raised:#FFFFFF;
+    --ink:#14161C;
+    --ink-soft:#565A66;
+    --ink-faint:#8B8F99;
+    --line:#DBDCD7;
+    --signal:#2F5FFF;
+    --signal-soft:#EAEFFF;
+    --signal-dim:#B9C6FF;
+    --amber:#E8A23D;
+    --radius:3px;
+    --content-w:920px;
+    --gutter:clamp(20px,5vw,64px);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .skip-link{
+    position:absolute; left:-999px; top:0; background:var(--ink); color:var(--paper);
+    padding:10px 16px; z-index:100; font-family:'IBM Plex Mono',monospace; font-size:13px;
+  }
+  .skip-link:focus{left:16px; top:16px;}
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--signal); outline-offset:3px;
+  }
+
+  /* ---------- section anchor offsets (clear the sticky topbar) ---------- */
+  #profile, #timeline, #skills, #experience, #education{
+    scroll-margin-top:80px;
+  }
+
+  /* ---------- scroll reveal ---------- */
+  .js-anim .reveal{
+    opacity:0; transform:translateY(14px);
+    transition:opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1);
+  }
+  .js-anim .reveal.in-view{opacity:1; transform:none;}
+
+  /* ---------- timeline bar draw-in ---------- */
+  .js-anim .t-bar{width:0 !important; transition:width .85s cubic-bezier(.65,0,.35,1), background .15s ease, border-color .15s ease, transform .15s ease;}
+  .js-anim .t-bar.revealed{width:var(--tw) !important;}
+
+  /* ---------- hero corner brackets ---------- */
+  .js-anim .corner{opacity:0; animation:cornerFade .5s ease forwards; animation-delay:.15s;}
+  @keyframes cornerFade{to{opacity:1;}}
+
+  /* ---------- available-status pulse ---------- */
+  .eyebrow::before{animation:statusPulse 2.2s ease-out infinite;}
+  @keyframes statusPulse{
+    0%{box-shadow:0 0 0 0 rgba(47,95,255,0.35);}
+    70%{box-shadow:0 0 0 6px rgba(47,95,255,0);}
+    100%{box-shadow:0 0 0 0 rgba(47,95,255,0);}
+  }
+
+  /* ---------- topbar scroll shadow ---------- */
+  .topbar{transition:box-shadow .25s ease;}
+  .topbar.scrolled{box-shadow:0 4px 16px rgba(20,22,28,0.06);}
+
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .display{font-family:'Space Grotesk',sans-serif;}
+
+  /* ---------- background grid ---------- */
+  .canvas{
+    position:relative;
+    max-width:var(--content-w);
+    margin:0 auto;
+    padding:0 var(--gutter);
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:20;
+    background:rgba(247,247,244,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{
+    max-width:var(--content-w); margin:0 auto; padding:14px var(--gutter);
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .topbar-mark{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em;
+    color:var(--ink-soft); text-transform:uppercase;
+  }
+  .topbar-nav{display:flex; gap:22px; font-family:'IBM Plex Mono',monospace; font-size:12.5px;}
+  .topbar-nav a{text-decoration:none; color:var(--ink-soft); letter-spacing:0.02em; margin-right:22px; position:relative; padding-bottom:2px;}
+  .topbar-nav a:last-child{margin-right:0;}
+  .topbar-nav a::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+    background:var(--signal); transform:scaleX(0); transform-origin:left;
+    transition:transform .25s ease;
+  }
+  .topbar-nav a:hover{color:var(--signal);}
+  .topbar-nav a:hover::after{transform:scaleX(1);}
+  .topbar-actions a{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.03em;
+    background:var(--ink); color:var(--paper); border:none; padding:8px 14px;
+    border-radius:var(--radius); cursor:pointer; text-decoration:none; display:inline-block;
+    white-space:nowrap;
+    transition:background .15s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  .topbar-actions a:hover{background:var(--signal); transform:translateY(-1px); box-shadow:0 4px 10px rgba(47,95,255,0.25);}
+  .topbar-actions a:active{transform:translateY(0);}
+  @media (max-width:640px){ .topbar-nav{display:none;} }
+
+  /* ---------- hero (frame) ---------- */
+  .hero{position:relative; padding:64px 0 44px;}
+  .frame-tag{
+    position:absolute; top:0; left:0;
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-faint);
+    letter-spacing:0.04em;
+  }
+  .frame-tag.right{left:auto; right:0; text-align:right;}
+  .corner{
+    position:absolute; width:14px; height:14px; border:1.5px solid var(--ink-faint);
+  }
+  .corner.tl{top:22px; left:-1px; border-right:none; border-bottom:none;}
+  .corner.tr{top:22px; right:-1px; border-left:none; border-bottom:none;}
+  .corner.bl{bottom:0; left:-1px; border-right:none; border-top:none;}
+  .corner.br{bottom:0; right:-1px; border-left:none; border-top:none;}
+
+  .eyebrow{
+    margin:36px 0 14px; font-family:'IBM Plex Mono',monospace; font-size:12.5px;
+    color:var(--signal); letter-spacing:0.08em; text-transform:uppercase;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:7px; height:7px; background:var(--signal); border-radius:50%; display:inline-block;}
+
+  h1.name{
+    font-family:'Space Grotesk',sans-serif; font-weight:700;
+    font-size:clamp(34px,6vw,58px); line-height:1.02; margin:0 0 10px; letter-spacing:-0.01em;
+  }
+  .role-line{
+    font-family:'Space Grotesk',sans-serif; font-size:clamp(17px,2.4vw,22px);
+    color:var(--ink-soft); font-weight:500; margin:0 0 22px;
+  }
+  .contact-row{
+    display:flex; flex-wrap:wrap; gap:10px 14px; margin-bottom:8px;
+  }
+  .contact-row a, .contact-row span{
+    font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--ink-soft);
+    text-decoration:none; border-bottom:1px solid transparent;
+  }
+  .contact-row a:hover{color:var(--signal); border-bottom-color:var(--signal);}
+  .contact-dot{color:var(--ink-faint);}
+
+  /* ---------- section divider ---------- */
+  .divider{
+    position:relative; display:flex; align-items:center; gap:14px;
+    margin:70px 0 30px; color:var(--ink-faint);
+  }
+  .divider .rule{flex:1; border-top:1px dashed var(--line);}
+  .divider .px-label{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.04em;
+  }
+  h2.section-title{
+    font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.12em; color:var(--ink);
+    margin:0; white-space:nowrap;
+  }
+
+  /* ---------- profile ---------- */
+  .profile-text{
+    max-width:66ch; color:var(--ink-soft); font-size:16.5px;
+  }
+  .profile-text strong{color:var(--ink); font-weight:600;}
+
+  /* ---------- timeline (signature element) ---------- */
+  .timeline{margin-top:8px;}
+  .timeline-axis{
+    display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace;
+    font-size:11px; color:var(--ink-faint); padding-left:0; margin-bottom:10px;
+    border-bottom:1px solid var(--line); padding-bottom:6px;
+  }
+  .timeline-rows{display:flex; flex-direction:column; gap:7px;}
+  .t-row{
+    display:grid; grid-template-columns:150px 1fr; align-items:center; gap:14px;
+  }
+  .t-label{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-soft);
+    display:flex; align-items:center; justify-content:flex-end; gap:6px; overflow:hidden;
+  }
+  .t-label .t-name{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .t-track{position:relative; height:22px; background:transparent;}
+  .t-bar{
+    position:absolute; top:3px; height:16px; border-radius:2px;
+    background:var(--signal-soft); border:1px solid var(--signal-dim);
+    cursor:pointer; width:var(--tw,0);
+    transition:background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+    min-width:6px;
+  }
+  .t-bar:hover, .t-bar:focus-visible{background:var(--signal); border-color:var(--signal); transform:scaleY(1.25);}
+  .t-bar.present{
+    background-image:repeating-linear-gradient(135deg, var(--signal-soft), var(--signal-soft) 4px, #dbe4ff 4px, #dbe4ff 8px);
+  }
+  .t-bar.present:hover{background-image:none;}
+  .t-legend{
+    margin-top:14px; display:flex; gap:18px; flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint);
+  }
+  .t-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .swatchmini{width:10px; height:10px; border-radius:2px; background:var(--signal-soft); border:1px solid var(--signal-dim); display:inline-block;}
+  .swatchmini.present{background-image:repeating-linear-gradient(135deg, var(--signal-soft), var(--signal-soft) 3px, #dbe4ff 3px, #dbe4ff 6px);}
+  .swatchmini.au{background:#FBEBD2; border-color:var(--amber);}
+  .t-bar.au{background:#FBEBD2; border-color:var(--amber);}
+  .t-bar.au:hover, .t-bar.au:focus-visible{background:var(--amber); border-color:var(--amber);}
+  .au-flag{
+    font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--amber);
+    border:1px solid var(--amber); border-radius:2px; padding:0 3px;
+    display:inline-flex; align-items:center; line-height:1.5; flex:none;
+  }
+
+  /* ---------- timeline tooltip ---------- */
+  .t-tooltip{
+    position:fixed; z-index:60; width:260px;
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:0 14px 32px rgba(20,22,28,0.14);
+    padding:14px 16px; opacity:0; transform:translateY(6px) scale(0.98);
+    transition:opacity .16s ease, transform .16s ease; pointer-events:none;
+  }
+  .t-tooltip.open{opacity:1; transform:none; pointer-events:auto;}
+  .t-tooltip .tt-eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--signal);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;
+  }
+  .t-tooltip .tt-role{
+    font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:14.5px;
+    color:var(--ink); line-height:1.25; margin-bottom:4px;
+  }
+  .t-tooltip .tt-dates{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint); margin-bottom:10px;
+  }
+  .t-tooltip .tt-summary{font-size:13px; color:var(--ink-soft); line-height:1.5; margin-bottom:10px;}
+  .t-tooltip .tt-link{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--signal);
+    text-decoration:none; border-bottom:1px solid var(--signal-dim);
+  }
+  .t-tooltip .tt-link:hover{border-bottom-color:var(--signal);}
+  .t-tooltip .tt-close{
+    position:absolute; top:8px; right:8px; width:20px; height:20px; border-radius:2px;
+    background:none; border:none; color:var(--ink-faint); cursor:pointer;
+    font-family:'IBM Plex Mono',monospace; font-size:14px; line-height:1;
+  }
+  .t-tooltip .tt-close:hover{color:var(--ink); background:var(--paper);}
+  .t-tooltip .tt-arrow{
+    position:absolute; width:9px; height:9px; background:var(--paper-raised);
+    border-left:1px solid var(--line); border-top:1px solid var(--line);
+  }
+  .t-tooltip .tt-arrow.down{bottom:-5px; transform:rotate(225deg); border-left:none; border-top:none; border-right:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .t-tooltip .tt-arrow.up{top:-5px; transform:rotate(45deg);}
+  @media (max-width:480px){
+    .t-tooltip{width:calc(100vw - 40px); left:20px !important;}
+  }
+
+  @media (max-width:640px){
+    .t-row{grid-template-columns:1fr;}
+    .t-label{justify-content:flex-start;}
+  }
+
+  /* ---------- skills / tokens ---------- */
+  .token-group{margin-bottom:26px;}
+  .token-group-label{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;
+  }
+  .token-list{display:flex; flex-wrap:wrap; gap:8px;}
+  .token{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink);
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius);
+    padding:6px 10px; display:inline-flex; align-items:center; gap:6px;
+    transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+  }
+  .token:hover{transform:translateY(-2px); border-color:var(--signal-dim); box-shadow:0 4px 10px rgba(20,22,28,0.06);}
+  .token .dot{width:6px; height:6px; border-radius:50%; background:var(--signal);}
+
+  /* ---------- experience cards ---------- */
+  .exp-card{
+    padding:22px 0 22px 16px; margin-left:-16px; border-bottom:1px solid var(--line); scroll-margin-top:80px;
+    border-left:2px solid transparent; transition:border-color .2s ease, background .2s ease;
+  }
+  .exp-card:hover{border-left-color:var(--signal); background:linear-gradient(90deg, var(--signal-soft), transparent 60%);}
+  .exp-card.jump-highlight{
+    border-left-color:var(--signal);
+    animation:jumpFlash 1.4s ease-out;
+  }
+  @keyframes jumpFlash{
+    0%{background:var(--signal-soft);}
+    100%{background:transparent;}
+  }
+  .exp-card:first-child{padding-top:0;}
+  .exp-head{
+    display:flex; justify-content:space-between; align-items:baseline; gap:14px; flex-wrap:wrap;
+    margin-bottom:8px;
+  }
+  .exp-title-wrap{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;}
+  .exp-idx{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--signal);
+    border:1px solid var(--signal-dim); border-radius:2px; padding:1px 5px;
+  }
+  .exp-title{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:18px;}
+  .exp-company{color:var(--signal); font-weight:500;}
+  .exp-dates{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-faint); white-space:nowrap;
+  }
+  .exp-bullets{margin:0; padding-left:18px; color:var(--ink-soft); font-size:15px;}
+  .exp-bullets li{margin-bottom:5px;}
+  .exp-bullets li.win{color:var(--ink); font-style:italic;}
+  .exp-bullets li.win::marker{color:var(--amber);}
+
+  /* ---------- education / certs ---------- */
+  .simple-row{
+    display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+    padding:12px 0; border-bottom:1px solid var(--line); font-size:15px;
+  }
+  .simple-row:last-child{border-bottom:none;}
+  .simple-row .left strong{font-weight:600;}
+  .simple-row .left span{color:var(--ink-soft);}
+  .simple-row .right{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-faint); white-space:nowrap;}
+
+  .cert-list{columns:2; column-gap:32px;}
+  @media (max-width:640px){.cert-list{columns:1;}}
+  .cert-item{
+    break-inside:avoid; padding:10px 0; border-bottom:1px solid var(--line); font-size:14.5px;
+  }
+  .cert-item .cname{display:block;}
+  .cert-item .cyear{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-faint);}
+
+  /* ---------- footer ---------- */
+  footer{
+    margin-top:80px; padding:34px 0 60px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;
+    scroll-margin-top:80px;
+  }
+  footer .mono{font-size:11.5px; color:var(--ink-faint);}
+  footer .foot-contact a{color:var(--ink-soft); text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:13px;}
+  footer .foot-contact a:hover{color:var(--signal);}
+
+  @media print{
+    .topbar{position:static; backdrop-filter:none;}
+    .topbar-actions{display:none;}
+    .canvas{background-image:none;}
+    body{background:#fff;}
+  }
+</style>
+</head>
+<body>
+<a href="#profile" class="skip-link">Skip to content</a>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-mark">Résumé / Fizal — v2026.08</div>
+    <nav class="topbar-nav" aria-label="Section navigation">
+      <a href="#timeline">Timeline</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="topbar-actions">
+      <a id="download-pdf" href="/resume.pdf" download="Fizal_UX-UI_Resume.pdf">Download PDF</a>
+    </div>
+  </div>
+</div>
+
+<main class="canvas">
+
+  <section class="hero">
+    <span class="frame-tag mono">FRAME — RESUME / 01</span>
+    <span class="frame-tag right mono">10.6 YRS · UX/UI</span>
+    <span class="corner tl" aria-hidden="true"></span>
+    <span class="corner tr" aria-hidden="true"></span>
+
+    <p class="eyebrow">Available for new engagements</p>
+    <h1 class="name">Mohammed Fizal<br>Sahubar Sadhik Ali</h1>
+    <p class="role-line">Senior UX / UI Designer — Design Systems &amp; Product Experience</p>
+    <div class="contact-row">
+      <a href="mailto:mohammedfizalart@gmail.com">mohammedfizalart@gmail.com</a>
+      <span class="contact-dot">·</span>
+      <a href="tel:+61417258464">+61 417 258 464</a>
+      <span class="contact-dot">·</span>
+      <span>Melbourne, AU</span>
+    </div>
+
+    <span class="corner bl" aria-hidden="true"></span>
+    <span class="corner br" aria-hidden="true"></span>
+  </section>
+
+  <div id="profile"></div>
+  <div class="divider"><div class="rule"></div><h2 class="section-title">Profile</h2><span class="px-label mono">— 64 —</span><div class="rule"></div></div>
+  <p class="profile-text reveal">
+    UX/UI designer with <strong>10+ years</strong> leading end-to-end design across banking, healthcare, travel and utilities.
+    Fluent across <strong>design thinking, research, information architecture, prototyping and design systems</strong>,
+    with a track record of pairing closely with BAs, developers and stakeholders to ship consistent, on-brand
+    products across web and mobile.
+  </p>
+
+  <div id="timeline"></div>
+  <div class="divider"><div class="rule"></div><h2 class="section-title">Timeline</h2><span class="px-label mono">2016 → 2026</span><div class="rule"></div></div>
+
+  <div class="timeline reveal">
+    <div class="timeline-axis mono">
+      <span style="margin-left:150px">2016</span><span>2018</span><span>2020</span><span>2022</span><span>2024</span><span>2026</span>
+    </div>
+    <div class="timeline-rows">
+      <div class="t-row">
+        <div class="t-label mono"><span class="t-name">AGL — Connectnow</span><span class="au-flag">AU</span></div>
+        <div class="t-track"><a class="t-bar present au" href="#agl" style="left:76.5%;--tw:23.5%" data-title="Senior UX/UI Designer — AGL, Connectnow" data-dates="Jun 2024 – Present" data-summary="Led UX/UI for a multi-brand digital aggregation platform, including a multi-brand Figma Design System across 4 brands." aria-label="AGL Connectnow, Jun 2024 to present, Australia"></a></div>
+      </div>
+      <div class="t-row">
+        <div class="t-label mono"><span class="t-name">Colonial First State</span><span class="au-flag">AU</span></div>
+        <div class="t-track"><a class="t-bar au" href="#cfs" style="left:69.7%;--tw:6.1%" data-title="UX/UI Designer — Colonial First State" data-dates="Sep 2023 – May 2024" data-summary="Delivered UX/UI for the CFS digital transformation and rebranding program, across desktop, tablet and mobile." aria-label="Colonial First State, Sep 2023 to May 2024, Australia"></a></div>
+      </div>
+      <div class="t-row">
+        <div class="t-label mono"><span class="t-name">Stolt-Nielsen S.A.</span></div>
+        <div class="t-track"><a class="t-bar" href="#stolt" style="left:62.1%;--tw:7.6%" data-title="Senior UX/UI Designer — Stolt-Nielsen S.A." data-dates="Nov 2022 – Sep 2023" data-summary="Revamped a legacy customer portal for tracking terminal stock, across web and mobile." aria-label="Stolt-Nielsen, Nov 2022 to Sep 2023"></a></div>
+      </div>
+      <div class="t-row">
+        <div class="t-label mono"><span class="t-name">Woolworths — WOWTrace</span></div>
+        <div class="t-track"><a class="t-bar" href="#wow" style="left:58.3%;--tw:3.0%" data-title="UX/UI Designer — Woolworths, WOWTrace" data-dates="Jun 2022 – Oct 2022" data-summary="Led client workshops, branding guidelines and wireframes for WOWTrace." aria-label="Woolworths WOWTrace, Jun 2022 to Oct 2022"></a></div>
+      </div>
+      <div class="t-row">
+        <div class="t-label mono"><span class="t-name">JAL Airlines</span></div>
+        <div class="t-track"><a class="t-bar" href="#jal" style="left:41.7%;--tw:16.6%" data-title="UX/UI Designer — JAL Airlines" data-dates="Aug 2020 – Jun 2022" data-summary="Personas, prototypes and usability testing — delivered on time, no escalations, spot award." aria-label="JAL Airlines, Aug 2020 to Jun 2022"></a></div>
+      </div>
+      <div class="t-row">
+        <div class="t-label mono"><span class="t-name">City Union Bank</span></div>
+        <div class="t-track"><a class="t-bar" href="#cub" style="left:22.7%;--tw:18.2%" data-title="UX/UI Designer — City Union Bank" data-dates="Jul 2018 – Jul 2020" data-summary="Personas, wireframes and usability testing for core banking products." aria-label="City Union Bank, Jul 2018 to Jul 2020"></a></div>
+      </div>
+      <div class="t-row">
+        <div class="t-label mono"><span class="t-name">Axa</span></div>
+        <div class="t-track"><a class="t-bar" href="#axa" style="left:19.7%;--tw:2.3%" data-title="UX/UI Designer — Axa" data-dates="Mar 2018 – Apr 2018" data-summary="Workflow modelling and a value-driven UX framework for design delivery." aria-label="Axa, Mar 2018 to Apr 2018"></a></div>
+      </div>
+      <div class="t-row">
+        <div class="t-label mono"><span class="t-name">Delta Airlines</span></div>
+        <div class="t-track"><a class="t-bar" href="#delta" style="left:18.9%;--tw:1.5%" data-title="UX/UI Designer — Delta Airlines" data-dates="Feb 2018" data-summary="Concept and usability testing through to pilot testing with the dev team." aria-label="Delta Airlines, Feb 2018"></a></div>
+      </div>
+      <div class="t-row">
+        <div class="t-label mono"><span class="t-name">Healthcare Innovation</span></div>
+        <div class="t-track"><a class="t-bar" href="#healthcare" style="left:2.3%;--tw:17.4%" data-title="UX/UI Designer — Healthcare Innovation Team" data-dates="Apr 2016 – Jan 2018" data-summary="User flows and prototypes for internal digital healthcare products." aria-label="Healthcare Innovation Team, Apr 2016 to Jan 2018"></a></div>
+      </div>
+    </div>
+    <div class="t-legend">
+      <span><span class="swatchmini"></span> Completed engagement</span>
+      <span><span class="swatchmini present"></span> Ongoing</span>
+      <span><span class="swatchmini au"></span> Australia-based</span>
+    </div>
+  </div>
+
+  <div class="t-tooltip" id="t-tooltip" role="dialog" aria-hidden="true">
+    <button type="button" class="tt-close" id="tt-close" aria-label="Close">×</button>
+    <div class="tt-eyebrow" id="tt-eyebrow"></div>
+    <div class="tt-role" id="tt-role"></div>
+    <div class="tt-dates mono" id="tt-dates"></div>
+    <div class="tt-summary" id="tt-summary"></div>
+    <a class="tt-link" id="tt-link" href="#">View full role →</a>
+    <div class="tt-arrow" id="tt-arrow"></div>
+  </div>
+
+  <div id="skills"></div>
+  <div class="divider"><div class="rule"></div><h2 class="section-title">Skills</h2><span class="px-label mono">— 48 —</span><div class="rule"></div></div>
+
+  <div class="token-group reveal">
+    <div class="token-group-label mono">UX methods</div>
+    <div class="token-list">
+      <span class="token"><span class="dot"></span>Design Thinking</span>
+      <span class="token"><span class="dot"></span>Rapid Sketching &amp; Prototyping</span>
+      <span class="token"><span class="dot"></span>Interaction Design</span>
+      <span class="token"><span class="dot"></span>Design Strategy</span>
+      <span class="token"><span class="dot"></span>Usability Testing</span>
+      <span class="token"><span class="dot"></span>Information Architecture</span>
+      <span class="token"><span class="dot"></span>Persona Building</span>
+      <span class="token"><span class="dot"></span>User Journey Mapping</span>
+      <span class="token"><span class="dot"></span>Data Analysis</span>
+    </div>
+  </div>
+  <div class="token-group reveal">
+    <div class="token-group-label mono">Tools</div>
+    <div class="token-list">
+      <span class="token"><span class="dot"></span>Figma</span>
+      <span class="token"><span class="dot"></span>Adobe XD</span>
+      <span class="token"><span class="dot"></span>Photoshop</span>
+      <span class="token"><span class="dot"></span>Illustrator</span>
+      <span class="token"><span class="dot"></span>Sketch</span>
+      <span class="token"><span class="dot"></span>InVision</span>
+      <span class="token"><span class="dot"></span>Axure</span>
+      <span class="token"><span class="dot"></span>UXPin</span>
+      <span class="token"><span class="dot"></span>Zeplin</span>
+    </div>
+  </div>
+  <div class="token-group reveal">
+    <div class="token-group-label mono">Ways of working</div>
+    <div class="token-list">
+      <span class="token"><span class="dot"></span>Agile</span>
+      <span class="token"><span class="dot"></span>Waterfall</span>
+      <span class="token"><span class="dot"></span>Cross-functional delivery with BAs, dev &amp; QA</span>
+    </div>
+  </div>
+
+  <div id="experience"></div>
+  <div class="divider"><div class="rule"></div><h2 class="section-title">Experience</h2><span class="px-label mono">09 engagements</span><div class="rule"></div></div>
+  <p class="profile-text" style="margin-bottom:24px;">Tata Consultancy Services Limited — 10.6 years, reverse-chronological.</p>
+
+  <article class="exp-card reveal" id="agl">
+    <div class="exp-head">
+      <div class="exp-title-wrap">
+        <span class="exp-idx mono">09</span>
+        <span class="exp-title">Senior UX/UI Designer <span class="exp-company">— AGL, Connectnow</span></span><span class="au-flag">AU</span>
+      </div>
+      <span class="exp-dates mono">Jun 2024 – Present</span>
+    </div>
+    <ul class="exp-bullets">
+      <li>Led end-to-end UX/UI design for a multi-brand digital aggregation platform covering Electricity, Gas and Internet products across multiple providers.</li>
+      <li>Designed complex customer journeys and conversion funnels, transforming business and technical requirements into intuitive, scalable digital experiences.</li>
+      <li>Established and managed a multi-brand Figma Design System, including design tokens, variables, typography and reusable components across 4 brands and responsive Mobile, Tablet and Desktop breakpoints.</li>
+      <li>Delivered white-label experiences while maintaining consistency across brand identities, shared UX patterns and underlying product architecture.</li>
+      <li>Partnered with product, business, engineering, legal and QA stakeholders to drive design decisions from discovery through implementation.</li>
+      <li>Conducted pixel-perfect design QA and implementation validation, resolving UI inconsistencies and ensuring high-quality production outcomes.</li>
+      <li>Produced prototypes, UX specifications, brand guidelines and supporting customer communication templates to enable consistent end-to-end delivery.</li>
+    </ul>
+  </article>
+
+  <article class="exp-card reveal" id="cfs">
+    <div class="exp-head">
+      <div class="exp-title-wrap">
+        <span class="exp-idx mono">08</span>
+        <span class="exp-title">UX/UI Designer <span class="exp-company">— Colonial First State (CFS)</span></span><span class="au-flag">AU</span>
+      </div>
+      <span class="exp-dates mono">Sep 2023 – May 2024</span>
+    </div>
+    <ul class="exp-bullets">
+      <li>Delivered UX/UI solutions as part of the CFS digital transformation and rebranding program, supporting customer-focused digital experiences.</li>
+      <li>Translated complex business requirements into user flows, information architecture, wireframes, high-fidelity interfaces and interactive prototypes.</li>
+      <li>Designed responsive experiences across desktop, tablet and mobile while adhering to enterprise brand and UX standards.</li>
+      <li>Collaborated with product owners, business stakeholders, developers and cross-functional teams throughout the design lifecycle.</li>
+      <li>Facilitated design workshops and stakeholder reviews to identify requirements, validate concepts and drive alignment.</li>
+      <li>Conducted UI/UX quality assurance and design validation to ensure production implementations met approved designs and usability expectations.</li>
+      <li>Created detailed design documentation and developer handover specifications to support efficient and consistent implementation.</li>
+    </ul>
+  </article>
+
+  <article class="exp-card reveal" id="stolt">
+    <div class="exp-head">
+      <div class="exp-title-wrap">
+        <span class="exp-idx mono">07</span>
+        <span class="exp-title">Senior UX/UI Designer <span class="exp-company">— Stolt-Nielsen S.A.</span></span>
+      </div>
+      <span class="exp-dates mono">Nov 2022 – Sep 2023</span>
+    </div>
+    <ul class="exp-bullets">
+      <li>Designed a responsive customer portal for tracking terminal stock, spanning web and mobile.</li>
+      <li>Built and managed the design system; led the visual and UX revamp of a legacy application.</li>
+      <li>Produced wireframes and visual designs as senior designer on the account, coordinating with developers and QA on delivery.</li>
+    </ul>
+  </article>
+
+  <article class="exp-card reveal" id="wow">
+    <div class="exp-head">
+      <div class="exp-title-wrap">
+        <span class="exp-idx mono">06</span>
+        <span class="exp-title">UX/UI Designer <span class="exp-company">— Woolworths, WOWTrace</span></span>
+      </div>
+      <span class="exp-dates mono">Jun 2022 – Oct 2022</span>
+    </div>
+    <ul class="exp-bullets">
+      <li>Led UX/UI design, gathering client requirements and running technical and design workshops.</li>
+      <li>Created branding guidelines, user journeys and wireframes; collaborated with developers and QA on asset and style guide delivery.</li>
+    </ul>
+  </article>
+
+  <article class="exp-card reveal" id="jal">
+    <div class="exp-head">
+      <div class="exp-title-wrap">
+        <span class="exp-idx mono">05</span>
+        <span class="exp-title">UX/UI Designer <span class="exp-company">— JAL Airlines</span></span>
+      </div>
+      <span class="exp-dates mono">Aug 2020 – Jun 2022</span>
+    </div>
+    <ul class="exp-bullets">
+      <li>Consulted with clients to define goals and presented user research findings to internal and external stakeholders.</li>
+      <li>Developed personas, usage scenarios, wireframes, storyboards, sitemaps and prototypes; ran usability testing.</li>
+      <li>Analysed user feedback to iterate on the experience and supported content development.</li>
+      <li class="win">Delivered every project on time with no escalations — received a spot award.</li>
+    </ul>
+  </article>
+
+  <article class="exp-card reveal" id="cub">
+    <div class="exp-head">
+      <div class="exp-title-wrap">
+        <span class="exp-idx mono">04</span>
+        <span class="exp-title">UX/UI Designer <span class="exp-company">— City Union Bank</span></span>
+      </div>
+      <span class="exp-dates mono">Jul 2018 – Jul 2020</span>
+    </div>
+    <ul class="exp-bullets">
+      <li>Translated product specs and user psychology into personas, wireframes and prototypes.</li>
+      <li>Ran concept and usability testing, defined interaction models and worked with UI designers on implementation.</li>
+      <li class="win">Delivered the project on time and received appreciation for quick turnaround.</li>
+    </ul>
+  </article>
+
+  <article class="exp-card reveal" id="axa">
+    <div class="exp-head">
+      <div class="exp-title-wrap">
+        <span class="exp-idx mono">03</span>
+        <span class="exp-title">UX/UI Designer <span class="exp-company">— Axa</span></span>
+      </div>
+      <span class="exp-dates mono">Mar 2018 – Apr 2018</span>
+    </div>
+    <ul class="exp-bullets">
+      <li>Modelled workflows and planned tasks for UX design delivery; built user personas with cross-functional partners.</li>
+      <li>Created a value-driven UX framework and documented the design process end to end.</li>
+    </ul>
+  </article>
+
+  <article class="exp-card reveal" id="delta">
+    <div class="exp-head">
+      <div class="exp-title-wrap">
+        <span class="exp-idx mono">02</span>
+        <span class="exp-title">UX/UI Designer <span class="exp-company">— Delta Airlines</span></span>
+      </div>
+      <span class="exp-dates mono">Feb 2018</span>
+    </div>
+    <ul class="exp-bullets">
+      <li>Ran concept and usability testing and built personas to define the interaction model.</li>
+      <li>Developed wireframes and prototypes, supporting the development team through to pilot testing.</li>
+    </ul>
+  </article>
+
+  <article class="exp-card reveal" id="healthcare">
+    <div class="exp-head">
+      <div class="exp-title-wrap">
+        <span class="exp-idx mono">01</span>
+        <span class="exp-title">UX/UI Designer <span class="exp-company">— Healthcare Innovation Team (Internal)</span></span>
+      </div>
+      <span class="exp-dates mono">Apr 2016 – Jan 2018</span>
+    </div>
+    <ul class="exp-bullets">
+      <li>Translated concepts into user flows, wireframes, mockups and prototypes for digital healthcare products.</li>
+      <li>Researched, sketched and user-tested experiences across a wide range of devices and interfaces.</li>
+    </ul>
+  </article>
+
+  <div id="education"></div>
+  <div class="divider"><div class="rule"></div><h2 class="section-title">Education</h2><span class="px-label mono">— 32 —</span><div class="rule"></div></div>
+  <div class="simple-row reveal">
+    <div class="left"><strong>Bachelor of Fine Arts, Painting</strong> — <span>Government College of Fine Arts</span></div>
+    <div class="right mono">May 2015</div>
+  </div>
+
+  <div class="divider"><div class="rule"></div><h2 class="section-title">Certifications</h2><span class="px-label mono">— 32 —</span><div class="rule"></div></div>
+  <div class="cert-list reveal">
+    <div class="cert-item"><span class="cname">Infra &amp; Data Security: Cyber Security Foundation</span><span class="cyear mono">2024</span></div>
+    <div class="cert-item"><span class="cname">Technology: Generative AI Foundation Curriculum</span><span class="cyear mono">2023</span></div>
+    <div class="cert-item"><span class="cname">Understanding and Implementing Design Thinking Curriculum</span><span class="cyear mono">2022</span></div>
+    <div class="cert-item"><span class="cname">Design Thinking Program Foundation Certification</span><span class="cyear mono">2022</span></div>
+    <div class="cert-item"><span class="cname">Human-Centered Design: An Introduction</span><span class="cyear mono">2018</span></div>
+    <div class="cert-item"><span class="cname">Digital: User Experience (UX) Foundation</span><span class="cyear mono">2016</span></div>
+  </div>
+
+  <footer id="contact">
+    <div class="mono">© 2026 Mohammed Fizal — built as a living document.</div>
+    <div class="foot-contact">
+      <a href="mailto:mohammedfizalart@gmail.com">mohammedfizalart@gmail.com</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  function each(list, fn){
+    for (var i = 0; i < list.length; i++){ fn(list[i], i); }
+  }
+
+  // scroll-triggered reveals
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealEls.length){
+    var revealObs = new IntersectionObserver(function(entries){
+      each(entries, function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    each(revealEls, function(el){ revealObs.observe(el); });
+  } else {
+    each(revealEls, function(el){ el.classList.add('in-view'); });
+  }
+
+  // timeline bars draw in, staggered, once
+  var timelineEl = document.querySelector('.timeline');
+  var bars = document.querySelectorAll('.t-bar');
+  if (timelineEl && bars.length && 'IntersectionObserver' in window){
+    var barObs = new IntersectionObserver(function(entries){
+      each(entries, function(entry){
+        if (entry.isIntersecting){
+          each(bars, function(bar, i){
+            setTimeout(function(){ bar.classList.add('revealed'); }, i * 70);
+          });
+          barObs.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.25});
+    barObs.observe(timelineEl);
+  } else {
+    each(bars, function(bar){ bar.classList.add('revealed'); });
+  }
+
+  // timeline tooltip: click a bar for high-level project details
+  var tooltip = document.getElementById('t-tooltip');
+  var activeBar = null;
+  if (tooltip && bars.length){
+    var ttEyebrow = document.getElementById('tt-eyebrow');
+    var ttRole = document.getElementById('tt-role');
+    var ttDates = document.getElementById('tt-dates');
+    var ttSummary = document.getElementById('tt-summary');
+    var ttLink = document.getElementById('tt-link');
+    var ttArrow = document.getElementById('tt-arrow');
+    var ttClose = document.getElementById('tt-close');
+
+    function closeTooltip(){
+      tooltip.classList.remove('open');
+      tooltip.setAttribute('aria-hidden', 'true');
+      if (activeBar){ activeBar.setAttribute('aria-expanded', 'false'); }
+      activeBar = null;
+    }
+
+    function openTooltip(bar){
+      activeBar = bar;
+      ttEyebrow.textContent = (bar.classList.contains('au') ? 'Australia-based' : 'Engagement') + (bar.classList.contains('present') ? ' · Ongoing' : '');
+      ttRole.textContent = bar.getAttribute('data-title') || '';
+      ttDates.textContent = bar.getAttribute('data-dates') || '';
+      ttSummary.textContent = bar.getAttribute('data-summary') || '';
+      ttLink.setAttribute('href', bar.getAttribute('href'));
+      bar.setAttribute('aria-expanded', 'true');
+
+      tooltip.classList.add('open');
+      tooltip.setAttribute('aria-hidden', 'false');
+
+      // position: prefer above the bar, flip below if too close to top
+      var rect = bar.getBoundingClientRect();
+      var ttWidth = 260;
+      var left = rect.left + (rect.width / 2) - (ttWidth / 2);
+      left = Math.max(12, Math.min(left, window.innerWidth - ttWidth - 12));
+      var tooltipHeight = tooltip.offsetHeight || 140;
+      var placeAbove = rect.top > tooltipHeight + 24;
+      var top = placeAbove ? (rect.top - tooltipHeight - 12) : (rect.bottom + 12);
+
+      tooltip.style.left = left + 'px';
+      tooltip.style.top = top + 'px';
+      ttArrow.className = 'tt-arrow ' + (placeAbove ? 'down' : 'up');
+      ttArrow.style.left = Math.max(10, Math.min(ttWidth - 20, (rect.left + rect.width / 2) - left - 4.5)) + 'px';
+    }
+
+    each(bars, function(bar){
+      bar.setAttribute('aria-haspopup', 'true');
+      bar.setAttribute('aria-expanded', 'false');
+      bar.addEventListener('click', function(e){
+        e.preventDefault();
+        if (activeBar === bar){ closeTooltip(); }
+        else { openTooltip(bar); }
+      });
+    });
+
+    ttClose.addEventListener('click', function(e){ e.preventDefault(); closeTooltip(); });
+    ttLink.addEventListener('click', function(e){
+      e.preventDefault();
+      var targetId = ttLink.getAttribute('href');
+      closeTooltip();
+      var target = targetId ? document.querySelector(targetId) : null;
+      if (target){
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+        target.classList.remove('jump-highlight');
+        // restart animation even if clicked repeatedly on the same card
+        void target.offsetWidth;
+        target.classList.add('jump-highlight');
+        setTimeout(function(){ target.classList.remove('jump-highlight'); }, 1400);
+      }
+    });
+
+    document.addEventListener('click', function(e){
+      if (activeBar && !tooltip.contains(e.target) && e.target !== activeBar){
+        closeTooltip();
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && activeBar){ closeTooltip(); activeBar && activeBar.focus && activeBar.focus(); }
+    });
+    window.addEventListener('scroll', function(){ if (activeBar) closeTooltip(); }, {passive:true});
+    window.addEventListener('resize', function(){ if (activeBar) closeTooltip(); });
+  }
+
+  // in-page nav links: scroll via JS instead of native anchor navigation
+  var jumpLinks = document.querySelectorAll('.topbar-nav a[href^="#"], .skip-link[href^="#"]');
+  each(jumpLinks, function(link){
+    link.addEventListener('click', function(e){
+      var id = link.getAttribute('href');
+      var target = id ? document.querySelector(id) : null;
+      if (target){
+        e.preventDefault();
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+        if (target.setAttribute){ target.setAttribute('tabindex','-1'); target.focus({preventScroll:true}); }
+      }
+    });
+  });
+
+  // topbar shadow on scroll
+  var topbar = document.querySelector('.topbar');
+  if (topbar){
+    var onScroll = function(){
+      topbar.classList.toggle('scrolled', window.scrollY > 8);
+    };
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+  }
+  // safety net: force-reveal everything after a short delay in case
+  // IntersectionObserver is unavailable or misbehaves in some environment
+  setTimeout(function(){
+    each(revealEls, function(el){ el.classList.add('in-view'); });
+    each(bars, function(bar){ bar.classList.add('revealed'); });
+  }, 2000);
+})();
+</script>
+</body>
+</html>
