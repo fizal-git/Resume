@@ -8,7 +8,7 @@
 <meta name="description" content="Mohammed Fizal — Senior Product Designer (UX/UI) in Melbourne. Multi-brand Figma design systems and tokens for AGL and Colonial First State. Accessible, AI-assisted prototyping; designs and builds.">
 <meta name="keywords" content="Senior Product Designer, Senior UX/UI Designer, Design Systems, Design Tokens, Figma, Accessibility, WCAG, AI prototyping, Front-end, Melbourne, Australia">
 <meta property="og:title" content="Mohammed Fizal — Senior Product Designer (UX/UI)">
-<meta property="og:description" content="Multi-brand design systems for AGL and Colonial First State. I design it and build it. Melbourne.">
+<meta property="og:description" content="Multi-brand design systems for AGL and Colonial First State. Melbourne.">
 <meta property="og:url" content="https://fizaluxdesigner.vercel.app/">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%20width%3D%2232%22%20height%3D%2232%22%3E%0A%20%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%23FFD700%22%20/%3E%0A%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2254%25%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-size%3D%2220%22%20font-weight%3D%22300%22%20fill%3D%22%23111111%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EF%3C/text%3E%0A%3C/svg%3E">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%20width%3D%2232%22%20height%3D%2232%22%3E%0A%20%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%23FFD700%22%20/%3E%0A%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2254%25%22%20font-family%3D%22system-ui%2C%20-apple-system%2C%20sans-serif%22%20font-size%3D%2220%22%20font-weight%3D%22300%22%20fill%3D%22%23111111%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EF%3C/text%3E%0A%3C/svg%3E" media="(prefers-color-scheme: light)">
@@ -58,7 +58,7 @@
   }
 
   /* ---------- section anchor offsets (clear the sticky topbar) ---------- */
-  #profile, #timeline, #skills, #experience, #education{
+  #profile, #accessibility, #timeline, #skills, #experience, #education{
     scroll-margin-top:80px;
   }
 
@@ -197,6 +197,23 @@
     max-width:66ch; color:var(--ink-soft); font-size:16.5px;
   }
   .profile-text strong{color:var(--ink); font-weight:600;}
+
+  /* ---------- accessibility ---------- */
+  .a11y-lead{
+    font-family:'Playfair Display',Georgia,serif; font-style:italic; font-size:clamp(19px,2.4vw,23px);
+    color:var(--ink); margin:0 0 20px; border-left:2px solid var(--signal); padding-left:14px;
+  }
+  .a11y-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:0; padding:0; list-style:none;}
+  .a11y-grid li{
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius);
+    padding:16px 18px; font-size:15px; color:var(--ink-soft); line-height:1.5;
+  }
+  .a11y-grid li strong{display:block; color:var(--ink); font-weight:600; margin-bottom:4px;}
+  .a11y-grid .a11y-tag{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--signal);
+    border:1px solid var(--signal-dim); border-radius:2px; padding:0 5px; margin-bottom:8px; letter-spacing:.04em;
+  }
+  @media (max-width:640px){ .a11y-grid{grid-template-columns:1fr;} }
 
   /* ---------- timeline (signature element) ---------- */
   .timeline{margin-top:8px;}
@@ -405,7 +422,7 @@
 
     <p class="eyebrow">Available for new engagements</p>
     <h1 class="name">Mohammed Fizal<br>Sahubar Sadhik Ali</h1>
-    <p class="role-line">Senior Product Designer (UX/UI) — Multi-brand Design Systems · I design it and build it</p>
+    <p class="role-line">Senior Product Designer (UX/UI) — Multi-brand Design Systems</p>
     <div class="contact-row">
       <a href="mailto:mohammedfizalart@gmail.com">mohammedfizalart@gmail.com</a>
       <span class="contact-dot">·</span>
@@ -439,6 +456,18 @@
       (this site is designed, coded and deployed by me). I partner with Product and Engineering in regulated environments
       and close the gap between Figma and production through rigorous design QA.
     </p>
+  </div>
+
+  <div id="accessibility"></div>
+  <div class="divider"><div class="rule"></div><h2 class="section-title">Accessibility</h2><span class="px-label mono">WCAG AA</span><div class="rule"></div></div>
+  <div class="reveal">
+    <p class="a11y-lead">Accessibility is a design requirement, not a retrofit.</p>
+    <ul class="a11y-grid">
+      <li><span class="a11y-tag">PRACTICE</span><strong>WCAG AA by default</strong>Colour contrast, keyboard and focus states, clear structure for screen readers, text alternatives, and accessible forms and error messages.</li>
+      <li><span class="a11y-tag">STANDARD</span><strong>AS EN 301 549:2020</strong>Australia's accessibility standard for ICT products and services, used in government procurement, which sets WCAG 2.1 AA as the benchmark for web content.</li>
+      <li><span class="a11y-tag">LAW</span><strong>Disability Discrimination Act 1992</strong>Online information and services are covered by the DDA, and the Australian Human Rights Commission points to WCAG AA as the benchmark for avoiding discrimination complaints.</li>
+      <li><span class="a11y-tag">SYSTEM</span><strong>Built into the design system</strong>Accessibility lives in the components, so every brand inherits accessible components by default.</li>
+    </ul>
   </div>
 
   <div id="timeline"></div>
